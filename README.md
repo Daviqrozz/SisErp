@@ -1,2 +1,2 @@
 # SisErp
-Sistema Erp Desenvolvido comm diversas tecnologias
+Sistema Erp Desenvolvido com diversas tecnologias
