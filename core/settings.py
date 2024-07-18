@@ -68,8 +68,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME' : 'SisErp',
         'USER' : 'root',
-        'PASSWORD' : 'rqqo231',
-        'PORT' : '3306 ',
+        'PORT' : '3306',
     }
 }
 

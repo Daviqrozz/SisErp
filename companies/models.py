@@ -1,6 +1,11 @@
 from django.db import models
-from accounts.models import User
 
+#Cadastro de empresas
 class Entreprise(models.Model):
     name = models.CharField(max_length=175)
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    user = models.ForeignKey("accounts.User", on_delete=models.CASCADE)
+#Cadastro de funcionario 
+class Employee(models.Model):
+    user = models.ForeignKey("accounts.User",on_delete=models.CASCADE)
+    enterprise = models.ForeignKey(Entreprise,on_delete=models.CASCADE)
+
