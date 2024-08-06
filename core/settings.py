@@ -66,8 +66,10 @@ CORS_ORIGIN_ALLOW_ALL = True
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME' : 'SisErp',
+        'HOST': 'localhost',
+        'NAME' : 'siserp',
         'USER' : 'root',
+        'PASSWORD':'rqqo231',
         'PORT' : '3306',
     }
 }
