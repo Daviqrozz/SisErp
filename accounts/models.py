@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, Permission
-from companies.models import Entreprise
+from companies.models import Enterprise
 
 # Dados do usuario
 class User(AbstractBaseUser):
@@ -18,7 +18,7 @@ class User(AbstractBaseUser):
 # Grupo das empresas(Representa o cargo da empresa)
 class Group(models.Model):
     name = models.CharField(max_length=150)
-    enterprise = models.ForeignKey(Entreprise, on_delete=models.CASCADE)
+    enterprise = models.ForeignKey(Enterprise, on_delete=models.CASCADE)
 
 
 # Logica das permissões que cada grupo de empresa tera

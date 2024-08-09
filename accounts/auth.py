@@ -5,13 +5,16 @@ from rest_framework.exceptions import AuthenticationFailed, APIException
 from django.contrib.auth.hashers import check_password, make_password
 
 from accounts.models import User
-from companies.models import Entreprise,Employee
+from companies.models import Enterprise,Employee
 
 # Logicas de autenticação
 class Authentication:
+
     def signin(self, email=None, password=None) -> User:
+        
         # Verifica se existe um usuário com o email fornecido
         user_exists = User.objects.filter(email=email).exists()
+        
         exception_auth = AuthenticationFailed("Email ou senha estão incorretos")
 
         # Se o usuário não existir ou a senha estiver incorreta, lança uma exceção
@@ -29,7 +32,7 @@ class Authentication:
         return user
 
     # Metodo de cadastro
-    def signup(self, email, name, password, type_account="employer", company_id=False):
+    def signup(self, email, name, password, type_account="owner", company_id=False):
         #Condição de nome vazio
         if not name or name == "":
             raise APIException("Nome nao pode ser nulo")
@@ -64,15 +67,17 @@ class Authentication:
 
         #Metodo de criar usuario tipo dono
         if type_account == 'owner':
-            created_entreprise = Entreprise.objects.create(
-                name = "Nome da empresa",
-                user_id = created_user.id
+            created_enterprise = Enterprise.objects.create(
+                name='Nome da empresa',
+                user_id=created_user.id
             )
         
         #Metodo de criar usuario tipo funcionario
         if type_account == 'employee':
-            #Vai associar o usuario(funcionario) a uma empresa pelo ID
-            created_employee = Employee.objects.create(
-            Employee_id = company_id or created_entreprise.id
+            Employee.objects.create(
+                enterprise_id=company_id or created_enterprise.id,
+                user_id=created_user.id
             )
+            
+        return created_user
             

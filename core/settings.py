@@ -69,7 +69,7 @@ DATABASES = {
         'HOST': 'localhost',
         'NAME' : 'siserp',
         'USER' : 'root',
-        'PASSWORD':'rqqo231',
+        'PASSWORD':'1234',
         'PORT' : '3306',
     }
 }
