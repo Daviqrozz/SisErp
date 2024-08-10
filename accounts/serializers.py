@@ -3,8 +3,9 @@ from accounts.models import User
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        field = (
+        fields = (
             'id',
-            'nome',
+            'name',
             'email',
+            'is_owner',
         )

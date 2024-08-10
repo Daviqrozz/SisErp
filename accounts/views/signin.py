@@ -8,6 +8,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 class Signin(Base):
     def post(self,request):
+        
         email = request.data.get('email')
         password = request.data.get('password')
 
@@ -22,6 +23,6 @@ class Signin(Base):
         return Response({
             "User": serializer.data,
             'Enterprise':enterprise,
-            'refresh':token,
-            'access':token.access_token
+            'refresh':str(token),
+            'access':str(token.access_token)
         })

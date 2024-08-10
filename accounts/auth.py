@@ -17,8 +17,17 @@ class Authentication:
         
         exception_auth = AuthenticationFailed("Email ou senha estão incorretos")
 
+        if not email and not password:
+            raise APIException("Dados precisam ser preenchidos")
+
+        if not email or email == "":
+            raise APIException("Email nao pode ser nulo")
+        
+        if not password or password == "":
+            raise APIException("Senha nao pode ser nulo")
+        
         # Se o usuário não existir ou a senha estiver incorreta, lança uma exceção
-        if not user_exists or not check_password(password):
+        if not user_exists:
             raise exception_auth
 
         # Recupera a primeira instância de User com o email fornecido
@@ -44,10 +53,9 @@ class Authentication:
             raise APIException("A senha nao pode ser nulo")
         
         #Verifica se o campo de id da empresa esta preenchido,se o tipo de usuario selecionado for dono
-        if type_account and not company_id:
+        if type_account == "employee" and not company_id:
             raise APIException("O id da empresa precisa ser definido") 
             
-
         user = User
 
         #Verifica de o email ja existe

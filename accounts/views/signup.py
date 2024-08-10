@@ -15,6 +15,4 @@ class Signup(Base):
 
         serializer = UserSerializer(user)
 
-        return Response({
-            "User": serializer.data,
-        })
+        return Response({"user": serializer.data})
