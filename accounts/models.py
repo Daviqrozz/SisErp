@@ -2,24 +2,24 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, Permission
 from companies.models import Enterprise
 
+#log:IsOwner esta sempre retornando como 1
+
 # Dados do usuario
 class User(AbstractBaseUser):
     name = models.CharField(max_length=150)
     email = models.EmailField(unique=True)
-    is_owner = models.BooleanField(default=True)
+    is_owner = models.BooleanField(default=False)
 
     USERNAME_FIELD = "email"
 
     def __str__(self):
         return self.email
 
-
 # Logica de Permissao
 # Grupo das empresas(Representa o cargo da empresa)
 class Group(models.Model):
     name = models.CharField(max_length=150)
     enterprise = models.ForeignKey(Enterprise, on_delete=models.CASCADE)
-
 
 # Logica das permissões que cada grupo de empresa tera
 class Group_Permissions(models.Model):

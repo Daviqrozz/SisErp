@@ -5,12 +5,17 @@ from accounts.serializers import UserSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-class GetUser(Base):
-    permition_classes = [IsAuthenticated]
 
-    def get(self,request) -> User:
+class GetUser(Base):
+    permision_classes = [IsAuthenticated]
+
+    def get(self,request) -> Response:
+
         user = User.objects.filter(id=request.user.id).first()
-        enterprise = self.get_enterprise_user(user)
+        if not user:
+            return Response({"error": "Usuário não encontrado"}, status=404)
+
+        enterprise = self.get_enterprise_user(user.id)
 
         serializer = UserSerializer(user)
 
@@ -18,7 +23,3 @@ class GetUser(Base):
             "user":serializer.data,
             "enterprise":enterprise,
         })
-    
-        
-    
-

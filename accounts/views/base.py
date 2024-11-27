@@ -46,3 +46,5 @@ class Base(APIView):
 
         # Retorna o dicionário enterprise com as informações do usuário
         return enterprise
+    
+   

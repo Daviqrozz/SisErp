@@ -1,7 +1,7 @@
-# Bilbioteca de exceções
+
 from rest_framework.exceptions import AuthenticationFailed, APIException
 
-# Biblioteca de criptografias
+
 from django.contrib.auth.hashers import check_password, make_password
 
 from accounts.models import User
@@ -70,7 +70,9 @@ class Authentication:
             email=email,
             password=password_hashed,
             #Verifica de o usuario que sera criado sera um funcionario ou dono
-            is_owner=0 if type_account == 'employee' else 1
+            #Se is owner = 1 o type account sera owner
+            #Se is owner = 0 o type account sera employee
+            is_owner = 0 if type_account == 'employee' else 1
         )
 
         #Metodo de criar usuario tipo dono
@@ -83,8 +85,8 @@ class Authentication:
         #Metodo de criar usuario tipo funcionario
         if type_account == 'employee':
             Employee.objects.create(
-                enterprise_id=company_id or created_enterprise.id,
-                user_id=created_user.id
+                enterprise_id = company_id or created_enterprise.id,
+                user_id = created_user.id
             )
             
         return created_user
